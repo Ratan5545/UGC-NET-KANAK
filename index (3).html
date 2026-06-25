@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UGC NET Political Science (JRF) — Study Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f5efe1;
+    --paper-2:#ece2c9;
+    --ink:#231d16;
+    --ink-soft:#5b5142;
+    --maroon:#7a2420;
+    --maroon-dark:#591714;
+    --gold:#a9802c;
+    --sage:#3c5b48;
+    --sage-bg:rgba(60,91,72,0.12);
+    --rule:#c9bb98;
+    --card-bg:#fbf8ef;
+    --shadow-card: 0 2px 10px rgba(35,29,22,0.08);
+    --shadow-pop: 0 12px 36px rgba(35,29,22,0.28);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    background-image: radial-gradient(circle at 1px 1px, rgba(35,29,22,0.05) 1px, transparent 0);
+    background-size: 18px 18px;
+  }
+  a{color:var(--maroon-dark); text-decoration: underline; text-decoration-color: rgba(122,36,32,0.35); text-underline-offset:2px;}
+  a:hover{text-decoration-color: var(--maroon-dark);}
+  button{font-family:inherit;}
+  :focus-visible{outline:2px solid var(--maroon-dark); outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important; animation:none !important;} }
+
+  .wrap{max-width:980px; margin:0 auto; padding:0 24px;}
+
+  /* ================= APP SHELL ================= */
+  .app-header{
+    background:var(--ink);
+    color:var(--paper);
+    border-bottom:3px double var(--gold);
+    padding:14px 0;
+  }
+  .app-header .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{
+    width:34px;height:34px;border-radius:50%;
+    border:1.5px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--gold); font-weight:700; line-height:1;
+    flex-shrink:0;
+  }
+  .brand-text .b-title{font-family:'Fraunces',serif; font-weight:600; font-size:17px;}
+  .brand-text .b-sub{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.06em; color:#c9bb98; text-transform:uppercase;}
+  .header-progress{display:flex; align-items:center; gap:10px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--paper-2);}
+  .hp-bar{width:120px; height:6px; border-radius:4px; background:rgba(245,239,225,0.18); overflow:hidden;}
+  .hp-fill{height:100%; background:var(--gold); width:0%; transition:width .4s ease;}
+
+  .app-nav{
+    position:sticky; top:0; z-index:40;
+    background:var(--paper-2);
+    border-bottom:1px solid var(--ink);
+    box-shadow: var(--shadow-card);
+  }
+  .app-nav .wrap{display:flex; gap:4px; overflow-x:auto; -ms-overflow-style:none; scrollbar-width:none;}
+  .app-nav .wrap::-webkit-scrollbar{display:none;}
+  .nav-tab{
+    border:none; background:transparent; cursor:pointer;
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ink-soft); padding:14px 16px; border-bottom:3px solid transparent;
+    white-space:nowrap;
+  }
+  .nav-tab:hover{color:var(--ink);}
+  .nav-tab.active{color:var(--maroon-dark); border-bottom-color:var(--maroon-dark); font-weight:600;}
+
+  .tab-panel{display:none; padding-bottom:50px;}
+  .tab-panel.active{display:block;}
+
+  /* ================= SECTION HEADERS (shared) ================= */
+  .section-head{margin: 46px 0 22px; display:flex; align-items:baseline; gap:14px;}
+  .section-head.first{margin-top:40px;}
+  .section-num{
+    font-family:'JetBrains Mono',monospace; color:var(--maroon-dark); font-size:13px;
+    border:1px solid var(--maroon-dark); padding:2px 8px; border-radius:3px;
+  }
+  h2.section-title{font-family:'Fraunces',serif; font-size:26px; font-weight:600; margin:0;}
+  .section-sub{color:var(--ink-soft); font-size:14px; margin: -8px 0 26px; max-width:680px;}
+
+  /* ================= DASHBOARD ================= */
+  .stat-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-top:22px;}
+  .stat-card{
+    background:var(--card-bg); border:1px solid var(--rule); border-radius:6px;
+    padding:18px 18px 16px; box-shadow:var(--shadow-card);
+  }
+  .stat-card .s-label{font-family:'JetBrains Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-soft);}
+  .stat-card .s-val{font-family:'Fraunces',serif; font-size:34px; font-weight:600; color:var(--maroon-dark); margin-top:6px;}
+  .stat-card .s-note{font-size:12px; color:var(--ink-soft); margin-top:4px;}
+
+  .dash-actions{display:flex; gap:10px; margin-top:22px; flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.05em; text-transform:uppercase;
+    border:1px solid var(--ink); background:var(--paper); color:var(--ink); padding:10px 16px;
+    border-radius:4px; cursor:pointer;
+  }
+  .btn:hover{background:var(--ink); color:var(--paper);}
+  .btn.primary{background:var(--maroon-dark); color:var(--paper); border-color:var(--maroon-dark);}
+  .btn.primary:hover{background:var(--maroon);}
+  .btn.danger{border-color:var(--maroon); color:var(--maroon-dark);}
+  .btn.danger:hover{background:var(--maroon); color:var(--paper);}
+  .btn.ghost{border-color:var(--rule);}
+
+  .unit-progress-list{margin-top:14px; border-top:1px solid var(--rule);}
+  .up-row{display:grid; grid-template-columns:34px 1fr 110px 56px; gap:12px; align-items:center; padding:11px 0; border-bottom:1px solid var(--rule); font-size:13.5px;}
+  .up-row .up-no{font-family:'Fraunces',serif; font-weight:700; color:var(--maroon-dark);}
+  .up-row .up-bar{height:8px; border-radius:5px; background:var(--paper-2); overflow:hidden; border:1px solid var(--rule);}
+  .up-row .up-bar-fill{height:100%; background:var(--sage);}
+  .up-row .up-pct{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--ink-soft); text-align:right;}
+
+  /* ================= CALENDAR ================= */
+  .cal-controls{display:flex; align-items:center; justify-content:space-between; margin-top:16px;}
+  .cal-controls .cal-title{font-family:'Fraunces',serif; font-size:20px; font-weight:600; min-width:200px; text-align:center;}
+  .cal-nav-btn{
+    border:1px solid var(--ink); background:var(--paper); width:36px; height:36px; border-radius:50%;
+    cursor:pointer; font-size:16px; line-height:1; color:var(--ink);
+  }
+  .cal-nav-btn:hover{background:var(--ink); color:var(--paper);}
+  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-top:18px;}
+  .cal-dow{font-family:'JetBrains Mono',monospace; font-size:10.5px; text-transform:uppercase; color:var(--ink-soft); text-align:center; padding-bottom:4px;}
+  .cal-cell{
+    aspect-ratio:1/1; border:1px solid var(--rule); border-radius:5px; background:var(--card-bg);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+    cursor:pointer; position:relative; font-size:13px;
+  }
+  .cal-cell:hover{border-color:var(--maroon-dark);}
+  .cal-cell.out{opacity:0.32; cursor:default;}
+  .cal-cell.today{border:2px solid var(--maroon-dark); font-weight:700;}
+  .cal-cell.done{background:var(--sage-bg); border-color:var(--sage);}
+  .cal-cell .dot{width:6px;height:6px;border-radius:50%;background:var(--sage);}
+  .cal-cell .note-flag{position:absolute; top:3px; right:5px; font-size:9px; color:var(--gold);}
+  .cal-legend{display:flex; gap:18px; margin-top:14px; font-size:12px; color:var(--ink-soft); flex-wrap:wrap;}
+  .cal-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .legend-swatch{width:11px;height:11px;border-radius:3px; display:inline-block;}
+
+  /* ================= ROADMAP HERO + TIMELINE (kept from original) ================= */
+  header.hero{border-bottom: 3px double var(--ink); padding: 40px 0 30px; position:relative;}
+  .eyebrow{font-family:'JetBrains Mono', monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--maroon-dark); display:flex; align-items:center; gap:10px;}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--maroon-dark);display:inline-block;}
+  .hero-grid{display:grid; grid-template-columns: 1fr 132px; gap:28px; align-items:start; margin-top:14px;}
+  h1.title{font-family:'Fraunces', serif; font-weight:600; font-size: 40px; line-height:1.08; margin: 8px 0 14px; letter-spacing:-0.01em;}
+  h1.title em{font-style:italic; color:var(--maroon);}
+  .dek{font-size:16px; color:var(--ink-soft); max-width:620px;}
+  .seal{width:128px;height:128px;border-radius:50%; border:2px solid var(--ink); display:flex;align-items:center;justify-content:center; position:relative; flex-shrink:0; background: repeating-radial-gradient(circle, var(--paper) 0 2px, var(--paper-2) 2px 3px);}
+  .seal::before{content:""; position:absolute; inset:9px; border:1px dashed var(--maroon-dark); border-radius:50%;}
+  .seal-text{font-family:'JetBrains Mono', monospace; text-align:center; font-size:10px; letter-spacing:0.06em; color:var(--maroon-dark); font-weight:600; line-height:1.6;}
+  .meta-bar{margin-top: 22px; display:flex; gap:28px; flex-wrap:wrap; font-size:13px; border-top:1px solid var(--rule); padding-top:16px;}
+  .meta-bar .m-label{font-family:'JetBrains Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); display:block; margin-bottom:3px;}
+  .meta-bar .m-val{font-weight:600;}
+
+  .phase{display:grid; grid-template-columns: 158px 1fr; gap: 20px; border-top:1px solid var(--rule); padding: 24px 0;}
+  .phase:last-child{border-bottom:1px solid var(--rule);}
+  .phase-when{font-family:'JetBrains Mono',monospace;}
+  .phase-month{font-family:'Fraunces',serif; font-size:21px; font-weight:600; color:var(--maroon-dark); margin-bottom:4px;}
+  .phase-dates{font-size:12px; color:var(--ink-soft);}
+  .phase-tag{display:inline-block; margin-top:10px; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; background:var(--ink); color:var(--paper); padding:3px 8px; border-radius:2px;}
+  .phase-body h3{font-size:16px; margin:0 0 8px; font-family:'Inter',sans-serif; font-weight:700;}
+  .phase-units{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 12px;}
+  .unit-chip{font-family:'JetBrains Mono',monospace; font-size:11px; border:1px solid var(--ink); padding:3px 9px; border-radius:20px; background:var(--paper-2);}
+  .phase-task{display:flex; align-items:flex-start; gap:9px; font-size:14px; margin-bottom:7px;}
+  .phase-task input{margin-top:3px; accent-color:var(--maroon-dark); width:15px;height:15px; flex-shrink:0; cursor:pointer;}
+  .phase-task label{cursor:pointer;}
+  .phase-task.done label{color:var(--ink-soft); text-decoration:line-through;}
+  .phase-action{margin-top:12px; font-size:13.5px; background: rgba(122,36,32,0.07); border-left:3px solid var(--maroon); padding:8px 12px; display:flex; align-items:flex-start; gap:9px;}
+  .phase-action input{margin-top:3px; accent-color:var(--maroon-dark); width:15px;height:15px; flex-shrink:0; cursor:pointer;}
+  .phase-action.done{text-decoration:line-through; color:var(--ink-soft);}
+
+  .callout{margin: 34px 0; border:1px solid var(--maroon); background: rgba(122,36,32,0.06); padding:18px 20px; border-radius:4px; font-size:14px;}
+  .callout strong{color:var(--maroon-dark);}
+
+  /* ================= UNIT ACCORDION ================= */
+  .unit-card{border:1px solid var(--ink); border-radius:4px; margin-bottom:14px; background: var(--paper); overflow:hidden;}
+  .unit-head{display:flex; align-items:center; gap:16px; padding:16px 18px; cursor:pointer; user-select:none; background: var(--paper-2);}
+  .unit-no{font-family:'Fraunces',serif; font-size:24px; font-weight:700; color:var(--maroon-dark); width:42px; flex-shrink:0;}
+  .unit-titles{flex:1;}
+  .unit-titles .ut-name{font-weight:700; font-size:16px;}
+  .unit-titles .ut-when{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-soft); margin-top:2px;}
+  .unit-progress-pill{font-family:'JetBrains Mono',monospace; font-size:11px; background:var(--sage-bg); color:var(--sage); border:1px solid var(--sage); padding:3px 9px; border-radius:20px; white-space:nowrap;}
+  .chevron{font-family:'JetBrains Mono',monospace; font-size:18px; transition: transform .2s ease; color:var(--maroon-dark);}
+  .unit-card.open .chevron{transform:rotate(45deg);}
+  .unit-panel{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+  .unit-card.open .unit-panel{max-height:4000px;}
+  .unit-panel-inner{padding: 6px 22px 24px;}
+  .topics-block{margin-bottom:16px;}
+  .topics-block h4{font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); margin:18px 0 8px; font-family:'JetBrains Mono',monospace;}
+  .topics-block h4:first-child{margin-top:0;}
+  .topic-group-label{font-size:13px; font-weight:700; color:var(--ink); margin:10px 0 6px;}
+  .topic-chips{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:4px;}
+  .topic-chip{display:flex; align-items:center; gap:6px; font-size:12.5px; border:1px solid var(--rule); background:#fbf8ef; padding:4px 10px 4px 6px; border-radius:20px;}
+  .topic-chip input{accent-color:var(--sage); width:13px;height:13px; cursor:pointer;}
+  .topic-chip.done{background:var(--sage-bg); border-color:var(--sage);}
+  .topic-chip.done span{text-decoration:line-through; color:var(--ink-soft);}
+
+  .resource-grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:14px; margin-top:6px;}
+  .resource-box{border:1px solid var(--rule); border-radius:4px; padding:12px 14px; background:#fbf8ef;}
+  .resource-box h5{margin:0 0 8px; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--sage); font-family:'JetBrains Mono',monospace;}
+  .lecture-row{display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:13px;}
+  .lecture-row input{accent-color:var(--maroon-dark); width:14px;height:14px; flex-shrink:0; cursor:pointer;}
+  .lecture-row .lec-title{flex:1; line-height:1.3;}
+  .lecture-row.done .lec-title{color:var(--ink-soft); text-decoration:line-through;}
+  .play-btn{border:1px solid var(--maroon-dark); color:var(--maroon-dark); background:transparent; font-size:11px; padding:3px 8px; border-radius:3px; cursor:pointer; font-family:'JetBrains Mono',monospace; white-space:nowrap;}
+  .play-btn:hover{background:var(--maroon-dark); color:var(--paper);}
+  .ext-link{font-size:12px; color:var(--ink-soft); text-decoration:none; flex-shrink:0;}
+  .mat-list{margin:0; padding-left:18px; font-size:13px;}
+  .mat-list li{margin-bottom:6px;}
+
+  /* ================= RESOURCES TAB TABLES ================= */
+  .res-table{width:100%; border-collapse:collapse; font-size:14px;}
+  .res-table th{text-align:left; font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft); border-bottom:1px solid var(--ink); padding:8px 10px;}
+  .res-table td{padding:11px 10px; border-bottom:1px solid var(--rule); vertical-align:top;}
+  .res-table tr:hover td{background:rgba(169,128,44,0.07);}
+
+  footer.site-footer{margin-top:60px; border-top:3px double var(--ink); padding: 24px 0 50px; font-size:12px; color:var(--ink-soft); font-family:'JetBrains Mono',monospace;}
+
+  @media (max-width:680px){
+    h1.title{font-size:28px;}
+    .hero-grid{grid-template-columns:1fr; }
+    .seal{display:none;}
+    .phase{grid-template-columns:1fr; gap:10px;}
+    .up-row{grid-template-columns:24px 1fr 70px 40px; font-size:12.5px;}
+    .header-progress{display:none;}
+  }
+
+  /* ================= MODALS ================= */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(35,29,22,0.7); display:none;
+    align-items:center; justify-content:center; z-index:100; padding:20px;
+  }
+  .modal-overlay.show{display:flex;}
+  .modal-box{
+    background:var(--paper); border-radius:6px; max-width:760px; width:100%;
+    box-shadow:var(--shadow-pop); overflow:hidden; border:1px solid var(--ink);
+  }
+  .modal-head{display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:var(--ink); color:var(--paper);}
+  .modal-head h3{margin:0; font-family:'Fraunces',serif; font-size:16px; font-weight:600;}
+  .modal-close{background:none; border:none; color:var(--paper); font-size:20px; cursor:pointer; line-height:1;}
+  .modal-body{padding:18px;}
+  .video-frame-wrap{position:relative; width:100%; aspect-ratio:16/9; background:#000;}
+  .video-frame-wrap iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+  .day-modal-date{font-family:'Fraunces',serif; font-size:20px; font-weight:600; color:var(--maroon-dark); margin-bottom:14px;}
+  .day-field{margin-bottom:14px;}
+  .day-field label{display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; margin-bottom:6px;}
+  .day-field input[type="checkbox"]{width:16px;height:16px; accent-color:var(--sage);}
+  .day-field textarea{width:100%; min-height:90px; border:1px solid var(--rule); border-radius:4px; padding:10px; font-family:'Inter',sans-serif; font-size:13.5px; resize:vertical; background:#fbf8ef;}
+  .day-modal-actions{display:flex; gap:10px; justify-content:flex-end; margin-top:10px;}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="wrap">
+    <div class="brand">
+      <div class="brand-mark">JRF<br>★</div>
+      <div class="brand-text">
+        <div class="b-title">Roadmap to JRF</div>
+        <div class="b-sub">Political Science · Code 02 · Study Tracker</div>
+      </div>
+    </div>
+    <div class="header-progress">
+      <span id="headerPctLabel">0% complete</span>
+      <div class="hp-bar"><div class="hp-fill" id="headerPctFill"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="app-nav">
+  <div class="wrap">
+    <button class="nav-tab active" data-tab="dashboard">Dashboard</button>
+    <button class="nav-tab" data-tab="calendar">Calendar</button>
+    <button class="nav-tab" data-tab="roadmap">Roadmap</button>
+    <button class="nav-tab" data-tab="units">Units &amp; Lectures</button>
+    <button class="nav-tab" data-tab="resources">Resources &amp; Books</button>
+  </div>
+</div>
+
+<main>
+
+  <!-- ===================== DASHBOARD ===================== -->
+  <section id="tab-dashboard" class="tab-panel active">
+    <div class="wrap">
+      <div class="section-head first">
+        <h2 class="section-title">Your Preparation Dashboard</h2>
+      </div>
+      <p class="section-sub">A quick read on how the six-month plan is going. Tick off topics and lectures in the Units tab, and mark your daily study sessions in the Calendar — the numbers below update automatically.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="s-label">Overall progress</div>
+          <div class="s-val" id="statOverallPct">0%</div>
+          <div class="s-note">across all topics &amp; lectures</div>
+        </div>
+        <div class="stat-card">
+          <div class="s-label">Units completed</div>
+          <div class="s-val" id="statUnitsDone">0 / 10</div>
+          <div class="s-note">100% of topics + lectures ticked</div>
+        </div>
+        <div class="stat-card">
+          <div class="s-label">Days studied</div>
+          <div class="s-val" id="statDaysStudied">0</div>
+          <div class="s-note">marked on the calendar</div>
+        </div>
+        <div class="stat-card">
+          <div class="s-label">Current streak</div>
+          <div class="s-val" id="statStreak">0</div>
+          <div class="s-note">consecutive days, ending today</div>
+        </div>
+      </div>
+
+      <div class="dash-actions">
+        <button class="btn primary" id="markTodayBtn">Mark today as studied</button>
+        <button class="btn ghost" data-jump="calendar">Open calendar</button>
+        <button class="btn ghost" data-jump="units">Open units</button>
+        <button class="btn danger" id="resetAllBtn">Reset all progress</button>
+      </div>
+
+      <div class="section-head">
+        <span class="section-num">A</span>
+        <h2 class="section-title">Unit-by-Unit Progress</h2>
+      </div>
+      <div class="unit-progress-list" id="unitProgressList"></div>
+    </div>
+  </section>
+
+  <!-- ===================== CALENDAR ===================== -->
+  <section id="tab-calendar" class="tab-panel">
+    <div class="wrap">
+      <div class="section-head first">
+        <h2 class="section-title">Daily Work Calendar</h2>
+      </div>
+      <p class="section-sub">Click any day to mark it as studied and leave yourself a short note about what you covered. A filled square means you showed up that day — the only metric that compounds over six months.</p>
+
+      <div class="cal-controls">
+        <button class="cal-nav-btn" id="calPrev">‹</button>
+        <div class="cal-title" id="calTitle">June 2026</div>
+        <button class="cal-nav-btn" id="calNext">›</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="cal-legend">
+        <span><span class="legend-swatch" style="background:var(--sage-bg); border:1px solid var(--sage);"></span> Studied</span>
+        <span><span class="legend-swatch" style="background:var(--paper); border:2px solid var(--maroon-dark);"></span> Today</span>
+        <span><span class="legend-swatch" style="background:#fbf8ef; border:1px solid var(--rule);"></span> No entry</span>
+      </div>
+      <p class="section-sub" id="calMonthSummary" style="margin-top:20px;"></p>
+    </div>
+  </section>
+
+  <!-- ===================== ROADMAP (original content) ===================== -->
+  <section id="tab-roadmap" class="tab-panel">
+    <div class="wrap">
+      <header class="hero">
+        <div class="eyebrow"><span class="dot"></span> PREPARATION GAZETTE · POLITICAL SCIENCE (CODE 02)</div>
+        <div class="hero-grid">
+          <div>
+            <h1 class="title">Roadmap to <em>JRF</em><br>June 24 — December 2026</h1>
+            <p class="dek">A month-by-month plan built directly from the official UGC NET Political Science syllabus (10 units), with topic-wise study resources, YouTube lectures, and a JRF-grade revision and mock-test schedule.</p>
+          </div>
+          <div class="seal">
+            <div class="seal-text">UGC · NET<br>JRF<br>★<br>2026</div>
+          </div>
+        </div>
+        <div class="meta-bar">
+          <div><span class="m-label">Tentative exam window</span><span class="m-val">31 Dec 2026 – 7 Jan 2027</span></div>
+          <div><span class="m-label">Notification expected</span><span class="m-val">~ October 2026</span></div>
+          <div><span class="m-label">Paper 2 weight</span><span class="m-val">100 Q · 200 marks · 10 units</span></div>
+          <div><span class="m-label">Paper 1 weight</span><span class="m-val">50 Q · 100 marks</span></div>
+        </div>
+      </header>
+
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2 class="section-title">The Six-Month Timeline</h2>
+      </div>
+      <p class="section-sub">Two syllabus units a month for five months, then a full month of pure revision and mocks in December. Tick off each action item as you complete it — your progress is saved automatically.</p>
+
+      <div class="timeline" id="timeline"></div>
+
+      <div class="callout">
+        <strong>JRF reality check:</strong> JRF cutoffs sit well above Assistant-Professor-only cutoffs. Passing isn't the bar — accuracy and speed across all 10 units is. Treat every mock's error log as seriously as first-pass learning.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== UNITS & LECTURES ===================== -->
+  <section id="tab-units" class="tab-panel">
+    <div class="wrap">
+      <div class="section-head first">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Unit-Wise Topics, Lectures &amp; Resources</h2>
+      </div>
+      <p class="section-sub">Topics are taken directly from the official UGC syllabus (Code 02). Tick each topic once you understand it, and tick each lecture once watched. Click <strong>Watch</strong> to play a lecture right here without leaving the page.</p>
+
+      <div class="units" id="units"></div>
+    </div>
+  </section>
+
+  <!-- ===================== RESOURCES & BOOKS ===================== -->
+  <section id="tab-resources" class="tab-panel">
+    <div class="wrap">
+      <div class="section-head first">
+        <span class="section-num">03</span>
+        <h2 class="section-title">General Resources (All Units)</h2>
+      </div>
+      <p class="section-sub">Use these alongside the unit-specific ones in the Units tab.</p>
+
+      <table class="res-table">
+        <thead><tr><th>Resource</th><th>What it's for</th><th>Link</th></tr></thead>
+        <tbody>
+          <tr><td>Official NTA UGC NET portal</td><td>Notification, application, admit card, official syllabus PDF, official answer keys</td><td><a href="https://ugcnet.nta.nic.in/" target="_blank" rel="noopener">ugcnet.nta.nic.in</a></td></tr>
+          <tr><td>e-PG Pathshala — Political Science</td><td>Free, UGC-vetted PG-level e-content (text + video modules) across nearly every unit — the most reliable free academic source</td><td><a href="https://epgp.inflibnet.ac.in/" target="_blank" rel="noopener">epgp.inflibnet.ac.in</a></td></tr>
+          <tr><td>SWAYAM (UGC-MOOCs)</td><td>Free government MOOCs; search "Political Science" or specific theory/IR courses for structured video modules with certificates</td><td><a href="https://swayam.gov.in/" target="_blank" rel="noopener">swayam.gov.in</a></td></tr>
+          <tr><td>Unacademy — UGC NET (YouTube)</td><td>Free live classes across Paper 1 and Paper 2 subjects including Political Science</td><td><a href="https://www.youtube.com/channel/UCNE5xD_X2WNelbnkRWTYvQg" target="_blank" rel="noopener">YouTube channel</a></td></tr>
+          <tr><td>NET CRACKERS — UGC NET Political Science (YouTube)</td><td>Dedicated channel for Political Theory, Indian Politics, Public Administration, IR &amp; Comparative Politics</td><td><a href="https://www.youtube.com/channel/UCA78he1xd6MvFP3yG-ZXXLg" target="_blank" rel="noopener">YouTube channel</a></td></tr>
+          <tr><td>UGC NET Adda247 (YouTube)</td><td>Live classes, strategy sessions, and free demo lectures across all NET subjects</td><td><a href="https://www.youtube.com/channel/UCeOoUjlLiP5qKBozcdIjnGA" target="_blank" rel="noopener">YouTube channel</a></td></tr>
+          <tr><td>UGC NET Testbook (YouTube)</td><td>Free unit-wise classes, doubt sessions, and previous-year paper discussions</td><td><a href="https://www.youtube.com/channel/UC_uR26BodKBZ4HVwxwd5isQ" target="_blank" rel="noopener">YouTube channel</a></td></tr>
+          <tr><td>"Discover Study" curated playlists</td><td>Full Political Science lecture series, factual revision, 1500 expected MCQs, conceptual revision, and PYQ analysis — organised playlists covering all 10 units</td><td><a href="https://youtube.com/playlist?list=PLAA57MNMqjjmEyfxbKtciJ9QcUzXh7ZtO" target="_blank" rel="noopener">Complete lectures playlist</a></td></tr>
+          <tr><td>Previous Year Question Papers</td><td>Solve unit-wise from September, full papers from October onward</td><td><a href="https://www.ugcnetonline.in/" target="_blank" rel="noopener">ugcnetonline.in</a></td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2 class="section-title">Core Reference Books</h2>
+      </div>
+      <p class="section-sub">Standard, widely recommended texts mapped to the units they cover best. Pair with the videos in the Units tab for concepts you find dense on first read.</p>
+
+      <table class="res-table">
+        <thead><tr><th>Book</th><th>Author</th><th>Covers</th></tr></thead>
+        <tbody>
+          <tr><td>Political Theory: An Introduction</td><td>Rajeev Bhargava &amp; Ashok Acharya (eds.)</td><td>Unit 1 — concepts &amp; traditions, Indian-context framing</td></tr>
+          <tr><td>Political Theory</td><td>Andrew Heywood</td><td>Unit 1 &amp; 2 — Western traditions and thinkers</td></tr>
+          <tr><td>An Introduction to Political Theory</td><td>O.P. Gauba</td><td>Units 1, 2, 4 — theory, thought, comparative concepts</td></tr>
+          <tr><td>Indian Political Thought (various compilations)</td><td>M.P. Singh &amp; Himanshu Roy (eds.)</td><td>Unit 3 — Indian thinkers</td></tr>
+          <tr><td>Indian Polity</td><td>M. Laxmikanth</td><td>Unit 7 — Constitution &amp; institutions</td></tr>
+          <tr><td>Indian Government and Politics</td><td>B.L. Fadia / Rajni Kothari (classic works)</td><td>Units 7 &amp; 8 — institutions and political processes</td></tr>
+          <tr><td>Comparative Politics</td><td>Standard NET-guide comparative politics sections</td><td>Unit 4</td></tr>
+          <tr><td>Global Politics</td><td>Andrew Heywood</td><td>Unit 5 &amp; 6 — IR theory and India's foreign policy context</td></tr>
+          <tr><td>International Relations</td><td>V.N. Khanna</td><td>Unit 5 — IR concepts and institutions</td></tr>
+          <tr><td>Public Administration</td><td>Mohit Bhattacharya / standard NET-guide chapters</td><td>Units 9 &amp; 10 — administration theory and governance</td></tr>
+        </tbody>
+      </table>
+
+      <footer class="site-footer">
+        <div>Built from the official UGC NET Political Science syllabus (Code 02). Exam window and notification dates are tentative as of June 2026 — confirm against the official notification once released at ugcnet.nta.nic.in. Third-party links may move or be re-organised; verify before relying on any single source. Progress, checklists and calendar entries are stored only in this browser, on this device.</div>
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== VIDEO MODAL ===================== -->
+<div class="modal-overlay" id="videoModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="videoModalTitle">Lecture</h3>
+      <button class="modal-close" id="videoModalClose">&times;</button>
+    </div>
+    <div class="modal-body" style="padding:0;">
+      <div class="video-frame-wrap"><iframe id="videoFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DAY MODAL ===================== -->
+<div class="modal-overlay" id="dayModal">
+  <div class="modal-box" style="max-width:440px;">
+    <div class="modal-head">
+      <h3>Log a study day</h3>
+      <button class="modal-close" id="dayModalClose">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="day-modal-date" id="dayModalDate">—</div>
+      <div class="day-field">
+        <label><input type="checkbox" id="dayDoneCheckbox"> Mark this day as studied</label>
+      </div>
+      <div class="day-field">
+        <label for="dayNoteText">What did you cover? (optional)</label>
+        <textarea id="dayNoteText" placeholder="e.g. Unit 2 — finished Hobbes &amp; Locke, did 30 PYQ MCQs"></textarea>
+      </div>
+      <div class="day-modal-actions">
+        <button class="btn ghost" id="dayClearBtn">Clear day</button>
+        <button class="btn primary" id="daySaveBtn">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   DATA — syllabus units (from the official roadmap)
+   ========================================================= */
+const unitsData = [
+  { no:"01", name:"Political Theory", when:"Phase 1 · Jun–Jul",
+    topics:"Concepts: Liberty, Equality, Justice, Rights, Democracy, Power, Citizenship. Political Traditions: Liberalism, Conservatism, Socialism, Marxism, Feminism, Ecologism, Multiculturalism, Postmodernism.",
+    yt:[["UGC NET Political Science Unit 1 — Political Theory (Sanskriti Jain)","https://www.youtube.com/watch?v=ln3pAd8NU0E"],
+        ["Unit 1 Complete Revision (Pradyumn Sir)","https://www.youtube.com/watch?v=D0Gb2HYpvkY"],
+        ["Unit 1 Political Theory (Puneet Sir)","https://www.youtube.com/watch?v=gFdBxRiiXC4"]],
+    mat:[["e-PG Pathshala","https://epgp.inflibnet.ac.in/"],
+         ["Discover Study — Conceptual Revision playlist","https://youtube.com/playlist?list=PLAA57MNMqjjm_5KwokVrmIuhTEUtEnddv"]],
+    note:"Make a comparison table across traditions (view on state, individual, equality) — this is exactly how NTA frames assertion-reason questions here." },
+
+  { no:"02", name:"Political Thought", when:"Phase 1 · Jun–Jul",
+    topics:"Confucius, Plato, Aristotle, Machiavelli, Hobbes, Locke, Rousseau, Hegel, Mary Wollstonecraft, J.S. Mill, Karl Marx, Gramsci, Hannah Arendt, Frantz Fanon, Mao Zedong, John Rawls.",
+    yt:[["Discover Study — Complete Political Science Lectures","https://youtube.com/playlist?list=PLAA57MNMqjjmEyfxbKtciJ9QcUzXh7ZtO"],
+        ["NET CRACKERS — Political Theory & Thought playlists","https://www.youtube.com/channel/UCA78he1xd6MvFP3yG-ZXXLg"]],
+    mat:[["e-PG Pathshala — Political Science","https://epgp.inflibnet.ac.in/"],
+         ["SWAYAM — search 'Western Political Thought'","https://swayam.gov.in/"]],
+    note:"Build one-page thinker cards: core idea, key text, what makes them distinct from the thinker before/after them chronologically." },
+
+  { no:"03", name:"Indian Political Thought", when:"Phase 2 · Aug",
+    topics:"Dharmashastra, Kautilya, Aggannasutta, Barani, Kabir, Pandita Ramabai, Tilak, Vivekanand, Tagore, Gandhi, Aurobindo, Periyar, Iqbal, M.N. Roy, Savarkar, Ambedkar, Nehru, Lohia, JP Narayan, Deendayal Upadhyaya.",
+    yt:[["Discover Study — Complete Factual Revision (all units)","https://youtube.com/playlist?list=PLAA57MNMqjjlSVEVCl7PxRiRCfoOjvCIF"],
+        ["UGC NET Adda247 — live classes","https://www.youtube.com/channel/UCeOoUjlLiP5qKBozcdIjnGA"]],
+    mat:[["e-PG Pathshala — Political Science","https://epgp.inflibnet.ac.in/"]],
+    note:"Group thinkers by tradition — social reform (Ramabai, Periyar), nationalist (Tilak, Aurobindo), constitutionalist (Ambedkar) — rather than memorising a flat list." },
+
+  { no:"04", name:"Comparative Political Analysis", when:"Phase 3 · Sep",
+    topics:"Approaches: institutional, political culture, political economy, new institutionalism. Colonialism and decolonisation, nationalism, state theory, democratic and non-democratic regimes, constitutionalism, democratisation, development theory, structures of power, electoral systems, parties, social movements, NGOs.",
+    yt:[["Discover Study — 1500 Most Expected MCQs","https://youtube.com/playlist?list=PLAA57MNMqjjksDBdPxbgWCy6aQfjkoCxG"],
+        ["UGC NET Testbook — unit classes","https://www.youtube.com/channel/UC_uR26BodKBZ4HVwxwd5isQ"]],
+    mat:[["e-PG Pathshala — Political Science","https://epgp.inflibnet.ac.in/"]],
+    note:"Regime-type classification (electoral/liberal/majoritarian/participatory vs. patrimonial/authoritarian/totalitarian/fascist) is a recurring matching-type question — drill this as a grid." },
+
+  { no:"05", name:"International Relations", when:"Phase 4 · Oct",
+    topics:"Approaches: Idealism, Realism, Structural Marxism, Neoliberalism, Neorealism, Social Constructivism, Critical Theory, Feminism, Postmodernism. Concepts: sovereignty, security. Conflict and peace, WMDs, deterrence. UN system and international law. Globalisation, Bretton Woods, WTO, G-20, BRICS. Regional bodies: EU, AU, SCO, ASEAN. Contemporary challenges: terrorism, climate, human rights, migration.",
+    yt:[["Discover Study — IR Current Affairs playlist","https://youtube.com/playlist?list=PLAA57MNMqjjnUAiB3LqACgnA_vwkaYQvm"],
+        ["Unacademy UGC NET — IR sessions","https://www.youtube.com/channel/UCNE5xD_X2WNelbnkRWTYvQg"]],
+    mat:[["e-PG Pathshala — Political Science","https://epgp.inflibnet.ac.in/"],
+         ["SWAYAM — search 'International Relations theory'","https://swayam.gov.in/"]],
+    note:"IR theory comparisons (realism vs. liberalism vs. constructivism on the state and anarchy) are a near-certain question type — keep a one-line distinguishing summary per theory." },
+
+  { no:"06", name:"India's Foreign Policy", when:"Phase 4 · Oct",
+    topics:"Perspectives on India's identity: postcolonial, rising power. Continuity and change, NAM, nuclear policy. Relations with USA, Russia, China. Engagement with EU, BRICS, ASEAN, SCO, AU, GCC. Neighbourhood policy: SAARC, Gujral doctrine, Act East, Look West. Negotiation in UN/WTO/IMF/IPCC. Maritime, energy, cyber security challenges.",
+    yt:[["NET CRACKERS — India's Foreign Policy","https://www.youtube.com/channel/UCA78he1xd6MvFP3yG-ZXXLg"],
+        ["Discover Study — Most Important Topics (short lectures)","https://youtube.com/playlist?list=PLAA57MNMqjjmw7esd1JQ3olUA2omMwMey"]],
+    mat:[["e-PG Pathshala — Political Science","https://epgp.inflibnet.ac.in/"]],
+    note:"This unit is current-affairs heavy — pair it with your weekly current affairs digest, especially India's recent positions in UN, WTO, and bilateral summits." },
+
+  { no:"07", name:"Political Institutions in India", when:"Phase 2 · Aug",
+    topics:"Making of the Constitution, Constituent Assembly, Preamble, Fundamental Rights, DPSP, Constitutionalism and Basic Structure, Union Executive and Parliament, Judiciary and judicial review/activism, State Executive and Legislature, Federalism, Election Commission and electoral reforms, Local Government, Constitutional/Statutory Bodies: CAG, NCSC, NCST, NHRC, NCW, NCM.",
+    yt:[["Discover Study — Complete Political Science Lectures","https://youtube.com/playlist?list=PLAA57MNMqjjmEyfxbKtciJ9QcUzXh7ZtO"],
+        ["UGC NET Adda247 — Indian Polity sessions","https://www.youtube.com/channel/UCeOoUjlLiP5qKBozcdIjnGA"]],
+    mat:[["e-PG Pathshala — Political Science","https://epgp.inflibnet.ac.in/"],
+         ["NTA Official Syllabus PDF","https://ugcnet.nta.nic.in/"]],
+    note:"Know exact Article numbers and what each covers — this unit is the most directly testable on factual recall, unlike the more conceptual units." },
+
+  { no:"08", name:"Political Processes in India", when:"Phase 3 · Sep",
+    topics:"State, economy and development: planning model, New Economic Policy. Globalisation's social/economic implications. Identity politics: religion, tribe, caste, region, language. Social movements: Dalit, tribal, women, farmers, labour. Civil society groups, regionalisation of Indian politics, gender and politics, party ideology and social base, electoral politics trends.",
+    yt:[["Discover Study — PYQ Analysis Lectures","https://youtube.com/playlist?list=PLAA57MNMqjjmHVP8JXOT303ubhCjRllFD"],
+        ["UGC NET Testbook — Indian Politics sessions","https://www.youtube.com/channel/UC_uR26BodKBZ4HVwxwd5isQ"]],
+    mat:[["e-PG Pathshala — Political Science","https://epgp.inflibnet.ac.in/"]],
+    note:"Social movements and identity politics questions often ask you to match a movement to its leading figures/organisations and decade — build a small timeline." },
+
+  { no:"09", name:"Public Administration", when:"Phase 5 · Nov",
+    topics:"Meaning and evolution, public vs. private administration. Approaches: system theory, decision-making, ecological. Theories: scientific management, rational choice, NPA, development admin, comparative PA, NPM. Organisation theories: bureaucratic, human relations. Leadership and motivation. Organisational communication (Chester Barnard). Conflict management (Mary Parker Follett). MBO (Peter Drucker).",
+    yt:[["NET CRACKERS — Public Administration unit","https://www.youtube.com/channel/UCA78he1xd6MvFP3yG-ZXXLg"],
+        ["Discover Study — Conceptual Revision playlist","https://youtube.com/playlist?list=PLAA57MNMqjjm_5KwokVrmIuhTEUtEnddv"]],
+    mat:[["e-PG Pathshala — Political Science","https://epgp.inflibnet.ac.in/"]],
+    note:"Match each named theorist (Barnard, Follett, Drucker, plus classical Fayol/Weber/Taylor) to their one core contribution — these get tested as direct one-liners." },
+
+  { no:"10", name:"Governance and Public Policy in India", when:"Phase 5 · Nov",
+    topics:"Governance, good/democratic governance. Accountability mechanisms: legislative, administrative, budgetary, judicial control. RTI, Consumer Protection Act, Citizen Charter, Ombudsman/Lokpal/Lokayukta. Grassroots governance: Panchayati Raj. Decentralised and participatory planning, e-governance, NITI Aayog. Public policy on housing, health, food security, MGNREGA, NHRM, RTE. Social audit, jansunwai.",
+    yt:[["Discover Study — Most Important Topics (short lectures)","https://youtube.com/playlist?list=PLAA57MNMqjjmw7esd1JQ3olUA2omMwMey"],
+        ["UGC NET Adda247 — Governance & Public Policy","https://www.youtube.com/channel/UCeOoUjlLiP5qKBozcdIjnGA"]],
+    mat:[["e-PG Pathshala — Political Science","https://epgp.inflibnet.ac.in/"],
+         ["SWAYAM — search 'Governance and Public Policy'","https://swayam.gov.in/"]],
+    note:"NITI Aayog, RTI, and Lokpal/Lokayukta provisions get updated — cross-check current status against this year's current affairs notes before the exam." }
+];
+
+/* =========================================================
+   DATA — six-month timeline phases
+   ========================================================= */
+const phasesData = [
+  { month:"June–July", dates:"Jun 24 – Jul 31", tag:"Foundation", heading:"Build the theoretical base",
+    units:["Unit 1 · Political Theory","Unit 2 · Political Thought"],
+    items:["Map the full syllabus into a personal tracker before reading anything.",
+           "Unit 1: concepts (liberty, equality, justice, rights, democracy, power, citizenship) + traditions (liberalism → postmodernism) — make one-pager comparisons between traditions.",
+           "Unit 2: thinker-by-thinker notes (Confucius → Rawls) — core idea, key text, 2–3 likely MCQ angles per thinker.",
+           "Paper 1: start research aptitude + reasoning (stable, scoring sections)."],
+    action:"Apply unit-wise tracker + finish Units 1–2 first pass by July 31." },
+
+  { month:"August", dates:"Aug 1 – Aug 31", tag:"Indian Foundations", heading:"Indian thought into Indian institutions",
+    units:["Unit 3 · Indian Political Thought","Unit 7 · Political Institutions in India"],
+    items:["Unit 3: Dharmashastra/Kautilya through Ambedkar, Nehru, Lohia, JP, Deendayal Upadhyaya — group thinkers by ideological lineage, not just chronology.",
+           "Unit 7: Constitution-making, Preamble/Fundamental Rights/DPSP, Union Executive & Parliament, Judiciary, Centre-State relations, Election Commission, statutory bodies.",
+           "Continue Paper 1: reading comprehension, ICT, higher education system.",
+           "Start your weekly revision day now if you haven't already — non-negotiable from here on."],
+    action:"Finish Units 3 & 7. Start unit-wise PYQ practice right after each unit." },
+
+  { month:"September", dates:"Sep 1 – Sep 30", tag:"Notification Month", heading:"Indian processes + comparative lens",
+    units:["Unit 8 · Political Processes in India","Unit 4 · Comparative Political Analysis"],
+    items:["Apply the moment the December notification drops — don't wait till the last date.",
+           "Unit 8: state/economy/development, globalisation, identity politics, social movements, regionalisation, gender and politics, party ideology.",
+           "Unit 4: approaches (institutional, political culture, political economy), colonialism/decolonisation, regime types, constitutionalism, democratisation, development theory.",
+           "Begin a weekly current-affairs digest — feeds directly into Units 6, 7, 8."],
+    action:"Finish Units 8 & 4. Submit application as soon as the window opens." },
+
+  { month:"October", dates:"Oct 1 – Oct 31", tag:"IR + Mocks Begin", heading:"World politics, then India in the world",
+    units:["Unit 5 · International Relations","Unit 6 · India's Foreign Policy"],
+    items:["Unit 5: IR theory (realism, liberalism, neorealism, constructivism, feminism, postmodernism), UN system, global governance, regional bodies (EU, AU, SCO, ASEAN), contemporary challenges.",
+           "Unit 6: India's foreign policy principles, NAM, nuclear policy, relations with major powers and neighbourhood, India's negotiation in UN/WTO/IMF/IPCC.",
+           "Start full-length mock tests (Paper 1 + Paper 2 combined, timed 3 hrs) — once a week to begin.",
+           "Begin Round 1 full revision of Units 1–4 using your own notes."],
+    action:"Finish Units 5 & 6. First mock test taken and reviewed by end of October." },
+
+  { month:"November", dates:"Nov 1 – Nov 30", tag:"Intensive Practice", heading:"Close the syllabus, open the mocks",
+    units:["Unit 9 · Public Administration","Unit 10 · Governance & Public Policy"],
+    items:["Unit 9: meaning/evolution of Public Admin, approaches, theories (scientific management, bureaucratic, human relations, NPM, development admin), leadership, organisational communication.",
+           "Unit 10: governance concepts, accountability mechanisms, RTI/Lokpal/Lokayukta, Panchayati Raj, NITI Aayog, public policy on housing/health/food security/MGNREGA, social audit.",
+           "Increase mocks to 2–3/week. Maintain an error log — concept gap vs. silly mistake vs. guess.",
+           "Solve full previous year papers (last 8–10 years), not just unit-wise anymore."],
+    action:"Full syllabus complete. 8+ full mocks taken and reviewed." },
+
+  { month:"December", dates:"Dec 1 – Exam", tag:"Final Stretch", heading:"Consolidate, don't expand",
+    units:["All 10 Units · Revision Only"],
+    items:["Weeks 1–2: 2–3 mocks/week, shift focus to speed and exam temperament — practice deciding fast when to skip a question.",
+           "Week 3: final revision pass using only your own short notes/flashcards — no fresh textbook reading.",
+           "Final week: taper down. Light revision of thinkers, IR theories, constitutional articles, current affairs sheet only.",
+           "Sort admit card, exam centre, and ID logistics early — don't leave this for the last 48 hours."],
+    action:"No new topics in December. Consolidation and accuracy only." }
+];
+
+/* =========================================================
+   STATE / PERSISTENCE  — localStorage + IndexedDB dual save
+   ========================================================= */
+const STORAGE_KEY = "ugcnetTrackerData_v1";
+const DB_NAME = "ugcNetTracker", DB_STORE = "state", DB_VER = 1;
+
+function defaultState(){ return { topics:{}, lectures:{}, phaseTasks:{}, calendar:{}, activeTab:"dashboard" }; }
+let state = defaultState();
+
+/* ---- Toast indicator ---- */
+(function injectToast(){
+  const t = document.createElement("div");
+  t.id = "saveToast";
+  t.style.cssText = "position:fixed;bottom:18px;right:18px;background:#231d16;color:#f5efe1;font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 14px;border-radius:4px;opacity:0;transition:opacity .25s;z-index:9999;pointer-events:none;";
+  t.textContent = "✓ Saved";
+  document.body.appendChild(t);
+})();
+function showSaveToast(){
+  const t = document.getElementById("saveToast");
+  if(!t) return;
+  t.style.opacity = "1";
+  clearTimeout(t._tid);
+  t._tid = setTimeout(()=>{ t.style.opacity = "0"; }, 1400);
+}
+
+/* ---- IndexedDB helpers ---- */
+let _db = null;
+function openDB(){
+  return new Promise((res, rej)=>{
+    if(_db){ res(_db); return; }
+    const req = indexedDB.open(DB_NAME, DB_VER);
+    req.onupgradeneeded = e => { e.target.result.createObjectStore(DB_STORE); };
+    req.onsuccess = e => { _db = e.target.result; res(_db); };
+    req.onerror = e => rej(e);
+  });
+}
+function idbSet(val){
+  return openDB().then(db=>{
+    return new Promise((res,rej)=>{
+      const tx = db.transaction(DB_STORE,"readwrite");
+      tx.objectStore(DB_STORE).put(val, STORAGE_KEY);
+      tx.oncomplete = ()=>res();
+      tx.onerror = e=>rej(e);
+    });
+  });
+}
+function idbGet(){
+  return openDB().then(db=>{
+    return new Promise((res,rej)=>{
+      const tx = db.transaction(DB_STORE,"readonly");
+      const req = tx.objectStore(DB_STORE).get(STORAGE_KEY);
+      req.onsuccess = ()=>res(req.result||null);
+      req.onerror = e=>rej(e);
+    });
+  });
+}
+
+/* ---- Load: try localStorage first, then IndexedDB ---- */
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      /* also backfill IndexedDB silently */
+      idbSet(raw).catch(()=>{});
+      return Object.assign(defaultState(), parsed);
+    }
+  }catch(e){ console.warn("localStorage read failed", e); }
+  return defaultState(); /* IndexedDB loaded async in initLoad */
+}
+
+async function initLoad(){
+  /* Try to get a saved state from IndexedDB if localStorage gave nothing */
+  const lsRaw = (() => { try{ return localStorage.getItem(STORAGE_KEY); }catch(e){ return null; } })();
+  if(lsRaw) return; /* already loaded synchronously */
+  try{
+    const raw = await idbGet();
+    if(raw){
+      const parsed = JSON.parse(raw);
+      state = Object.assign(defaultState(), parsed);
+      renderTimeline(); renderUnits(); renderCalendar(); renderDashboard();
+      setActiveTab(state.activeTab || "dashboard");
+    }
+  }catch(e){ console.warn("IndexedDB read failed", e); }
+}
+
+/* ---- Save: write to both localStorage and IndexedDB ---- */
+function saveState(){
+  const json = JSON.stringify(state);
+  /* localStorage */
+  try{ localStorage.setItem(STORAGE_KEY, json); }
+  catch(e){ console.warn("localStorage save failed:", e); }
+  /* IndexedDB (async, non-blocking) */
+  idbSet(json).catch(e=>console.warn("IndexedDB save failed:", e));
+  showSaveToast();
+}
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+function parseTopics(text){
+  const sentences = text.split(/\.\s*/).map(s=>s.trim()).filter(Boolean);
+  return sentences.map(s=>{
+    const colonIdx = s.indexOf(":");
+    let label=null, rest=s;
+    if(colonIdx>-1 && colonIdx<40){ label=s.slice(0,colonIdx).trim(); rest=s.slice(colonIdx+1).trim(); }
+    const items = rest.split(",").map(x=>x.trim()).filter(Boolean);
+    return { label, items };
+  });
+}
+function ytEmbedUrl(url){
+  try{
+    const u = new URL(url);
+    if(u.pathname === "/watch" && u.searchParams.get("v")) return "https://www.youtube.com/embed/" + u.searchParams.get("v");
+    if(u.pathname === "/playlist" && u.searchParams.get("list")) return "https://www.youtube.com/embed/videoseries?list=" + u.searchParams.get("list");
+    return null;
+  }catch(e){ return null; }
+}
+function dateKey(d){
+  return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+}
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+/* attach parsed topic groups once */
+unitsData.forEach(u => { u.groups = parseTopics(u.topics); });
+
+function unitStats(u){
+  let total=0, done=0;
+  u.groups.forEach((g,gi)=> g.items.forEach((it,ii)=>{
+    total++; if(state.topics[u.no+"-"+gi+"-"+ii]) done++;
+  }));
+  u.yt.forEach((entry,idx)=>{
+    total++; if(state.lectures[u.no+"-"+idx]) done++;
+  });
+  return { total, done, pct: total ? Math.round(done/total*100) : 0 };
+}
+
+function overallStats(){
+  let total=0, done=0, unitsComplete=0;
+  unitsData.forEach(u=>{
+    const s = unitStats(u);
+    total += s.total; done += s.done;
+    if(s.total>0 && s.done===s.total) unitsComplete++;
+  });
+  phasesData.forEach((p,pi)=> p.items.forEach((it,ii)=>{
+    total++; if(state.phaseTasks[pi+"-"+ii]) done++;
+  }));
+  return { total, done, pct: total ? Math.round(done/total*100) : 0, unitsComplete };
+}
+
+function daysStudiedCount(){
+  return Object.values(state.calendar).filter(d=>d && d.done).length;
+}
+function currentStreak(){
+  let streak=0;
+  let d = new Date();
+  d.setHours(0,0,0,0);
+  while(true){
+    const k = dateKey(d);
+    if(state.calendar[k] && state.calendar[k].done){ streak++; d.setDate(d.getDate()-1); }
+    else break;
+  }
+  return streak;
+}
+
+/* =========================================================
+   RENDER: DASHBOARD
+   ========================================================= */
+function renderDashboard(){
+  const o = overallStats();
+  document.getElementById("statOverallPct").textContent = o.pct + "%";
+  document.getElementById("statUnitsDone").textContent = o.unitsComplete + " / 10";
+  document.getElementById("statDaysStudied").textContent = daysStudiedCount();
+  document.getElementById("statStreak").textContent = currentStreak();
+  document.getElementById("headerPctLabel").textContent = o.pct + "% complete";
+  document.getElementById("headerPctFill").style.width = o.pct + "%";
+
+  const list = document.getElementById("unitProgressList");
+  list.innerHTML = "";
+  unitsData.forEach(u=>{
+    const s = unitStats(u);
+    const row = document.createElement("div");
+    row.className = "up-row";
+    row.innerHTML = `
+      <div class="up-no">${u.no}</div>
+      <div>${u.name}</div>
+      <div class="up-bar"><div class="up-bar-fill" style="width:${s.pct}%;"></div></div>
+      <div class="up-pct">${s.pct}%</div>
+    `;
+    list.appendChild(row);
+  });
+}
+
+/* =========================================================
+   RENDER: ROADMAP TIMELINE
+   ========================================================= */
+function renderTimeline(){
+  const container = document.getElementById("timeline");
+  container.innerHTML = "";
+  phasesData.forEach((p, pi)=>{
+    const wrap = document.createElement("div");
+    wrap.className = "phase";
+    const chips = p.units.map(u=>`<span class="unit-chip">${escapeHtml(u)}</span>`).join("");
+    const taskRows = p.items.map((it,ii)=>{
+      const key = pi+"-"+ii;
+      const checked = !!state.phaseTasks[key];
+      return `<div class="phase-task ${checked?"done":""}">
+        <input type="checkbox" data-phase="${pi}" data-item="${ii}" ${checked?"checked":""}>
+        <label>${escapeHtml(it)}</label>
+      </div>`;
+    }).join("");
+    wrap.innerHTML = `
+      <div class="phase-when">
+        <div class="phase-month">${escapeHtml(p.month)}</div>
+        <div class="phase-dates">${escapeHtml(p.dates)}</div>
+        <div class="phase-tag">${escapeHtml(p.tag)}</div>
+      </div>
+      <div class="phase-body">
+        <h3>${escapeHtml(p.heading)}</h3>
+        <div class="phase-units">${chips}</div>
+        ${taskRows}
+        <div class="phase-action">Action: ${escapeHtml(p.action)}</div>
+      </div>
+    `;
+    container.appendChild(wrap);
+  });
+  container.querySelectorAll('input[type="checkbox"][data-phase]').forEach(cb=>{
+    cb.addEventListener("change", e=>{
+      const pi = e.target.getAttribute("data-phase"), ii = e.target.getAttribute("data-item");
+      state.phaseTasks[pi+"-"+ii] = e.target.checked;
+      saveState();
+      renderTimeline();
+      renderDashboard();
+    });
+  });
+}
+
+/* =========================================================
+   RENDER: UNITS & LECTURES
+   ========================================================= */
+function renderUnits(){
+  const container = document.getElementById("units");
+  container.innerHTML = "";
+  unitsData.forEach(u=>{
+    const s = unitStats(u);
+    const card = document.createElement("div");
+    card.className = "unit-card";
+
+    let topicsHtml = "";
+    u.groups.forEach((g, gi)=>{
+      if(g.label) topicsHtml += `<div class="topic-group-label">${escapeHtml(g.label)}</div>`;
+      topicsHtml += `<div class="topic-chips">`;
+      g.items.forEach((it, ii)=>{
+        const key = u.no+"-"+gi+"-"+ii;
+        const checked = !!state.topics[key];
+        topicsHtml += `<label class="topic-chip ${checked?"done":""}">
+          <input type="checkbox" data-unit="${u.no}" data-gi="${gi}" data-ii="${ii}" ${checked?"checked":""}>
+          <span>${escapeHtml(it)}</span>
+        </label>`;
+      });
+      topicsHtml += `</div>`;
+    });
+
+    const ytHtml = u.yt.map(([title,url],idx)=>{
+      const key = u.no+"-"+idx;
+      const checked = !!state.lectures[key];
+      const embed = ytEmbedUrl(url);
+      return `<div class="lecture-row ${checked?"done":""}">
+        <input type="checkbox" data-unit="${u.no}" data-lec="${idx}" ${checked?"checked":""}>
+        <span class="lec-title">${escapeHtml(title)}</span>
+        ${embed ? `<button class="play-btn" data-embed="${escapeHtml(embed)}" data-title="${escapeHtml(title)}">▶ Watch</button>` : `<a class="ext-link" href="${url}" target="_blank" rel="noopener">Open ↗</a>`}
+      </div>`;
+    }).join("");
+
+    const matHtml = u.mat.map(([label,url])=>`<li><a href="${url}" target="_blank" rel="noopener">${escapeHtml(label)}</a></li>`).join("");
+
+    card.innerHTML = `
+      <div class="unit-head" data-toggle>
+        <div class="unit-no">${u.no}</div>
+        <div class="unit-titles">
+          <div class="ut-name">${escapeHtml(u.name)}</div>
+          <div class="ut-when">${escapeHtml(u.when)}</div>
+        </div>
+        <div class="unit-progress-pill">${s.done}/${s.total} done</div>
+        <div class="chevron">+</div>
+      </div>
+      <div class="unit-panel">
+        <div class="unit-panel-inner">
+          <div class="topics-block">
+            <h4>Syllabus topics</h4>
+            ${topicsHtml}
+          </div>
+          <div class="resource-grid">
+            <div class="resource-box">
+              <h5>YouTube lectures</h5>
+              ${ytHtml}
+            </div>
+            <div class="resource-box">
+              <h5>Study material</h5>
+              <ul class="mat-list">${matHtml}</ul>
+            </div>
+          </div>
+          <div class="phase-action" style="margin-top:14px;">JRF tip: ${escapeHtml(u.note)}</div>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  container.querySelectorAll(".unit-head").forEach(h=>{
+    h.addEventListener("click", ()=> h.parentElement.classList.toggle("open"));
+  });
+  container.querySelectorAll('input[type="checkbox"][data-gi]').forEach(cb=>{
+    cb.addEventListener("change", e=>{
+      const unit = e.target.getAttribute("data-unit"), gi = e.target.getAttribute("data-gi"), ii = e.target.getAttribute("data-ii");
+      state.topics[unit+"-"+gi+"-"+ii] = e.target.checked;
+      saveState();
+      const openCards = Array.from(container.querySelectorAll(".unit-card.open")).map(c=>c.querySelector(".ut-name").textContent);
+      renderUnits();
+      reopenUnits(openCards);
+      renderDashboard();
+    });
+  });
+  container.querySelectorAll('input[type="checkbox"][data-lec]').forEach(cb=>{
+    cb.addEventListener("change", e=>{
+      const unit = e.target.getAttribute("data-unit"), lec = e.target.getAttribute("data-lec");
+      state.lectures[unit+"-"+lec] = e.target.checked;
+      saveState();
+      const openCards = Array.from(container.querySelectorAll(".unit-card.open")).map(c=>c.querySelector(".ut-name").textContent);
+      renderUnits();
+      reopenUnits(openCards);
+      renderDashboard();
+    });
+  });
+  container.querySelectorAll(".play-btn").forEach(btn=>{
+    btn.addEventListener("click", e=>{
+      e.stopPropagation();
+      openVideoModal(btn.getAttribute("data-title"), btn.getAttribute("data-embed"));
+    });
+  });
+}
+function reopenUnits(names){
+  document.querySelectorAll("#units .unit-card").forEach(c=>{
+    if(names.includes(c.querySelector(".ut-name").textContent)) c.classList.add("open");
+  });
+}
+
+/* =========================================================
+   VIDEO MODAL
+   ========================================================= */
+const videoModal = document.getElementById("videoModal");
+const videoFrame = document.getElementById("videoFrame");
+function openVideoModal(title, embedUrl){
+  document.getElementById("videoModalTitle").textContent = title;
+  videoFrame.src = embedUrl + (embedUrl.includes("?") ? "&" : "?") + "autoplay=1";
+  videoModal.classList.add("show");
+}
+function closeVideoModal(){
+  videoModal.classList.remove("show");
+  videoFrame.src = "";
+}
+document.getElementById("videoModalClose").addEventListener("click", closeVideoModal);
+videoModal.addEventListener("click", e=>{ if(e.target === videoModal) closeVideoModal(); });
+
+/* =========================================================
+   CALENDAR
+   ========================================================= */
+let calViewYear, calViewMonth;
+(function initCalView(){
+  const now = new Date();
+  calViewYear = now.getFullYear();
+  calViewMonth = now.getMonth();
+})();
+const MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+let activeDayKey = null;
+
+function renderCalendar(){
+  document.getElementById("calTitle").textContent = MONTH_NAMES[calViewMonth] + " " + calViewYear;
+  const grid = document.getElementById("calGrid");
+  grid.innerHTML = "";
+  ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(d=>{
+    const el = document.createElement("div");
+    el.className = "cal-dow"; el.textContent = d;
+    grid.appendChild(el);
+  });
+
+  const firstDay = new Date(calViewYear, calViewMonth, 1);
+  const startOffset = firstDay.getDay();
+  const daysInMonth = new Date(calViewYear, calViewMonth+1, 0).getDate();
+  const today = new Date(); today.setHours(0,0,0,0);
+  let studiedThisMonth = 0;
+
+  const totalCells = Math.ceil((startOffset + daysInMonth)/7)*7;
+  for(let i=0;i<totalCells;i++){
+    const dayNum = i - startOffset + 1;
+    const cellDate = new Date(calViewYear, calViewMonth, dayNum);
+    const cell = document.createElement("div");
+    const inMonth = dayNum>=1 && dayNum<=daysInMonth;
+    cell.className = "cal-cell" + (inMonth ? "" : " out");
+    if(inMonth){
+      const k = dateKey(cellDate);
+      const entry = state.calendar[k];
+      const isToday = cellDate.getTime() === today.getTime();
+      if(isToday) cell.classList.add("today");
+      if(entry && entry.done){ cell.classList.add("done"); studiedThisMonth++; }
+      cell.innerHTML = `<div>${dayNum}</div>` + (entry && entry.done ? `<div class="dot"></div>` : "") + (entry && entry.note ? `<div class="note-flag">✎</div>` : "");
+      cell.addEventListener("click", ()=> openDayModal(k, cellDate));
+    }
+    grid.appendChild(cell);
+  }
+  document.getElementById("calMonthSummary").textContent = studiedThisMonth + " day(s) marked studied in " + MONTH_NAMES[calViewMonth] + ".";
+}
+document.getElementById("calPrev").addEventListener("click", ()=>{
+  calViewMonth--; if(calViewMonth<0){ calViewMonth=11; calViewYear--; } renderCalendar();
+});
+document.getElementById("calNext").addEventListener("click", ()=>{
+  calViewMonth++; if(calViewMonth>11){ calViewMonth=0; calViewYear++; } renderCalendar();
+});
+
+/* day modal */
+const dayModal = document.getElementById("dayModal");
+function openDayModal(key, dateObj){
+  activeDayKey = key;
+  const entry = state.calendar[key] || { done:false, note:"" };
+  document.getElementById("dayModalDate").textContent = dateObj.toLocaleDateString(undefined, { weekday:"long", year:"numeric", month:"long", day:"numeric" });
+  document.getElementById("dayDoneCheckbox").checked = !!entry.done;
+  document.getElementById("dayNoteText").value = entry.note || "";
+  dayModal.classList.add("show");
+}
+function closeDayModal(){ dayModal.classList.remove("show"); activeDayKey = null; }
+document.getElementById("dayModalClose").addEventListener("click", closeDayModal);
+dayModal.addEventListener("click", e=>{ if(e.target === dayModal) closeDayModal(); });
+document.getElementById("daySaveBtn").addEventListener("click", ()=>{
+  if(!activeDayKey) return;
+  const done = document.getElementById("dayDoneCheckbox").checked;
+  const note = document.getElementById("dayNoteText").value.trim();
+  if(!done && !note){ delete state.calendar[activeDayKey]; }
+  else { state.calendar[activeDayKey] = { done, note }; }
+  saveState();
+  closeDayModal();
+  renderCalendar();
+  renderDashboard();
+});
+document.getElementById("dayClearBtn").addEventListener("click", ()=>{
+  if(!activeDayKey) return;
+  delete state.calendar[activeDayKey];
+  saveState();
+  closeDayModal();
+  renderCalendar();
+  renderDashboard();
+});
+
+/* quick "mark today" button on dashboard */
+document.getElementById("markTodayBtn").addEventListener("click", ()=>{
+  const today = new Date(); today.setHours(0,0,0,0);
+  const k = dateKey(today);
+  const existing = state.calendar[k] || {};
+  state.calendar[k] = { done:true, note: existing.note || "" };
+  saveState();
+  renderCalendar();
+  renderDashboard();
+});
+
+/* reset all */
+document.getElementById("resetAllBtn").addEventListener("click", ()=>{
+  if(confirm("This clears every checked topic, lecture, timeline task, and calendar entry on this device. This cannot be undone. Continue?")){
+    state = defaultState();
+    saveState();
+    renderTimeline(); renderUnits(); renderCalendar(); renderDashboard();
+  }
+});
+
+/* =========================================================
+   TAB NAVIGATION
+   ========================================================= */
+function setActiveTab(name){
+  document.querySelectorAll(".nav-tab").forEach(b=> b.classList.toggle("active", b.getAttribute("data-tab")===name));
+  document.querySelectorAll(".tab-panel").forEach(p=> p.classList.toggle("active", p.id === "tab-"+name));
+  state.activeTab = name;
+  saveState();
+  window.scrollTo({ top:0, behavior:"instant" in window ? "instant" : "auto" });
+}
+document.querySelectorAll(".nav-tab").forEach(btn=>{
+  btn.addEventListener("click", ()=> setActiveTab(btn.getAttribute("data-tab")));
+});
+document.querySelectorAll("[data-jump]").forEach(btn=>{
+  btn.addEventListener("click", ()=> setActiveTab(btn.getAttribute("data-jump")));
+});
+
+/* =========================================================
+   INIT
+   ========================================================= */
+state = loadState();  /* sync load from localStorage */
+renderTimeline();
+renderUnits();
+renderCalendar();
+renderDashboard();
+setActiveTab(state.activeTab || "dashboard");
+initLoad();  /* async: if localStorage was empty, try IndexedDB */
+</script>
+</body>
+</html>
